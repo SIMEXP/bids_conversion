@@ -12,9 +12,11 @@ SIEMENS = ['Prisma_fit', 'TrioTim', 'Prisma', 'Skyra']
 GE = ['DISCOVERY MR750','SIGNA Pioneer']
 PHILIPS = ['Intera','Achieva','Ingenia']
 
-CONFIG_FOLDER = '/home/bore/p/unf/s/bids_conversion_cimaq/configs'
-MAIN_CONFIG = os.path.join(CONFIG_FOLDER, 'config.json')
+CONFIG_FOLDER = '/home/bore/p/unf/s/bids_conversion/configs'
 
+MAIN_CONFIG = os.path.join(CONFIG_FOLDER, 'config.json')
+GE_CONFIG = os.path.join(CONFIG_FOLDER, 'config_ge_cimaq.json')
+SIEMENS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_siemens_cimaq.json')
 
 def get_arguments():
     parser = argparse.ArgumentParser(
@@ -81,28 +83,34 @@ class IRMSession:
         self.session = patient_name.split('_')[2]  # visit label
 
         self.scanner_manufacturer = self.getManufacturer()
-        self.config = self.getConfig()
+        self.config = os.path.join(CONFIG_FOLDER ,self.getConfig())
 
     def getManufacturer(self):
         if self.scanner_model in SIEMENS:
             return 'siemens'
         elif self.scanner_model in PHILIPS:
             return 'philips'
+        elif self.scanner_model in GE:
+            return 'ge'
 
     def getConfig(self):
-        return 'config_{}_{}.json'.format(self.scanner_manufacturer,
-                                     self.institution)
+        return 'config_{}_cimaq_{}.json'.format(self.scanner_manufacturer,
+                                                self.institution)
 
     def show(self):
         print('#############')
         print('# Subject: {}'.format(self.patient_name))
         print('# Input file: {}'.format(self.filename))
+        print('# Scanner Model: {}'.format(self.scanner_model))
+        print('# Institution: {}'.format(self.institution))
         print('#############')
 
 
 def readMeta(iFolder):
     metas = []
-    for iFile in glob.glob(os.path.join(iFolder,'*meta')):
+    allFiles = glob.glob(os.path.join(iFolder,'*meta'))
+    allFiles.sort()
+    for iFile in allFiles:
         print('Read {}'.format(iFile))
         fp = open(iFile)
         for i, line in enumerate(fp):
@@ -142,10 +150,12 @@ def readMeta(iFolder):
 
 def extract(sub):
     tarname= sub.filename + '.tar.gz'
-    print('-> Extraction {}'.format(tarname))
-    iTar = tarfile.open(name=tarname, mode='r|gz')
-    iTar.extractall()
-
+    if not os.path.exists(sub.filename):
+        print('-> Extraction {}'.format(tarname))
+        iTar = tarfile.open(name=tarname, mode='r|gz')
+        iTar.extractall()
+    else:
+        print('-> Already extracted {}'.format(tarname))
 
 
 def convert(sub, bidsOutput):
@@ -155,16 +165,49 @@ def convert(sub, bidsOutput):
                                                           MAIN_CONFIG,
                                                           bidsOutput)
     os.system(cmd)
-    print(cmd)
 
-    cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
-                                                          sub.pscid,
-                                                          sub.session,
-                                                          sub.config,
-                                                          bidsOutput)
+    if sub.institution == 'IUGM':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              sub.config,
+                                                              bidsOutput)
+        os.system(cmd)
+"""
+    if sub.scanner_manufacturer == 'ge':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              GE_CONFIG,
+                                                              bidsOutput)
+        os.system(cmd)
 
-    print(cmd)
+    elif sub.institution == 'Mc_Connell_Brain_Imaging_Centre':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              sub.config,
+                                                              bidsOutput)
+        os.system(cmd)
+"""
 
+"""
+    elif sub.institution == 'Hospital_Douglas':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              sub.config,
+                                                              bidsOutput)
+        os.system(cmd)
+
+    elif sub.scanner_manufacturer == 'siemens' and sub.institution != '':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              SIEMENS_CONFIG,
+                                                              bidsOutput)
+        os.system(cmd)
+"""
 def main():
     args = get_arguments()
     logging.basicConfig(level=args.log_level)

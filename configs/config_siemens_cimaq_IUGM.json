@@ -1,11 +1,13 @@
 {
+    "dupMethod": "dup",
+    "lowerCase": "True",
     "descriptions": [
         {
             "dataType": "anat",
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*STAR*",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
+		"ImageType": ["*", "*", "M", "*"]
             }
         },
         {
@@ -13,7 +15,7 @@
             "modalityLabel": "bold",
             "customLabels": "task-rest",
             "criteria": {
-                "SeriesDescription": "BOLD_Resting_State"
+                "SeriesDescription": "Connectivity_fMRI"
             },
 	    "sidecarChanges": {
                 "TaskName": "rest"
@@ -126,7 +128,7 @@
             "dataType": "dwi",
             "modalityLabel": "dwi",
             "criteria": {
-                "SeriesDescription": "DWI"
+                "SeriesDescription": "D*I"
             }
         },
         {

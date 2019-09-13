@@ -5,7 +5,7 @@
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "T2*star*",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
+		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             }
         },
         {
@@ -13,7 +13,7 @@
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*STAR*",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
+		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             }
         },
         {
@@ -21,7 +21,7 @@
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*STAR*",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
+		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
             }
         },
         {
@@ -54,11 +54,11 @@
         {
             "dataType": "fmap",
             "modalityLabel": "magnitude1",
-	    "intendedFor": 5,
+	          "intendedFor": 5,
             "criteria": {
                 "SeriesDescription": "gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		"EchoTime": 0.00492
+		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+		            "EchoTime": 0.00492
             }
         },
         {
@@ -85,7 +85,7 @@
             "modalityLabel": "phasediff",
 	    "intendedFor": 5,
             "criteria": {
-                "SeriesDescription": "BOLD_RS_fieldmap_gre_field_mapping", 
+                "SeriesDescription": "BOLD_RS_fieldmap_gre_field_mapping",
 		"ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
             }
         },
@@ -94,7 +94,7 @@
             "modalityLabel": "magnitude1",
 	    "intendedFor": 5,
             "criteria": {
-                "SeriesDescription": "BOLD_RS_fieldmap_gre_field_mapping", 
+                "SeriesDescription": "BOLD_RS_fieldmap_gre_field_mapping",
 		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
 		"EchoTime": 0.00492
             }
@@ -160,7 +160,7 @@
             "modalityLabel": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		"EchoTime": 0.091
+		            "EchoTime": 0.091
             }
         },
         {
@@ -168,7 +168,7 @@
             "modalityLabel": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		"EchoTime": 0.093
+		            "EchoTime": 0.093
             }
         },
         {
@@ -176,7 +176,7 @@
             "modalityLabel": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		"EchoTime": 0.01
+		            "EchoTime": 0.01
             }
         },
         {
@@ -189,7 +189,7 @@
         {
             "dataType": "fmap",
             "modalityLabel": "epi",
-	    "intendedFor": 20,
+	          "intendedFor": 20,
             "criteria": {
                 "SeriesDescription": "D*0*"
             }
