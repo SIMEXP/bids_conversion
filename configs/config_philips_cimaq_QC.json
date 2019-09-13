@@ -1,0 +1,128 @@
+{
+    "descriptions": [
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2star",
+            "criteria": {
+                "SeriesDescription": "T2_FFE*"
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2w",
+            "criteria": {
+                "SeriesDescription": "DUAL_*",
+                "EchoTime": 0.1
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "PD",
+            "criteria": {
+                "SeriesDescription": "DUAL_*",
+                "EchoTime": 0.0125
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-rest",
+            "criteria": {
+                "SeriesDescription": "*fMRI"
+            },
+	    "sidecarChanges": {
+                "TaskName": "rest"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-memory",
+            "criteria": {
+                "SeriesDescription": "*MemoryTask"
+            },
+	    "sidecarChanges": {
+                "TaskName": "memory"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "epi",
+	    "intendedFor": 4,
+            "criteria": {
+                "SeriesDescription": "fMRI*MemoryTask_*PA*"
+            },
+            "sidecarChanges": {
+                "PhaseEncodingDirection": "j",
+		"TotalReadoutTime": 1
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "DTI_32*"
+            },
+            "sidecarChanges": {
+                "PhaseEncodingDirection": "j-"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "epi",
+	    "intendedFor": 6,
+            "criteria": {
+                "SeriesDescription": "*b0*AP*"
+            },
+            "sidecarChanges": {
+                "PhaseEncodingDirection": "j",
+		"TotalReadoutTime": 1
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "epi",
+	    "intendedFor": 6,
+            "criteria": {
+                "SeriesDescription": "D*B0*AP*"
+            },
+            "sidecarChanges": {
+                "PhaseEncodingDirection": "j",
+		"TotalReadoutTime": 1
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "epi",
+	    "intendedFor": 4,
+            "criteria": {
+                "SeriesDescription": "fMRI*MemoryTask_*AP*"
+            },
+            "sidecarChanges": {
+                "PhaseEncodingDirection": "j-",
+		"TotalReadoutTime": 1
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fieldmap",
+	    "intendedFor": 4,
+            "criteria": {
+                "SeriesDescription": "B0_map",
+		"ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
+            },
+            "sidecarChanges": {
+                "Units": "Hz"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "magnitude",
+	    "intendedFor": 4,
+            "criteria": {
+                "SeriesDescription": "B0_map",
+		"ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
+            }
+        }
+    ]
+}
