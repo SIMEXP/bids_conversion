@@ -17,6 +17,7 @@ CONFIG_FOLDER = '/home/bore/p/unf/s/bids_conversion/configs'
 MAIN_CONFIG = os.path.join(CONFIG_FOLDER, 'config.json')
 GE_CONFIG = os.path.join(CONFIG_FOLDER, 'config_ge_cimaq.json')
 SIEMENS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_siemens_cimaq.json')
+PHILIPS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq.json')
 
 def get_arguments():
     parser = argparse.ArgumentParser(
@@ -173,8 +174,25 @@ def convert(sub, bidsOutput):
                                                               sub.config,
                                                               bidsOutput)
         os.system(cmd)
-"""
-    if sub.scanner_manufacturer == 'ge':
+
+    elif sub.institution == 'Hospital_Douglas':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              sub.config,
+                                                              bidsOutput)
+        os.system(cmd)
+
+    elif sub.institution != 'Quebec' and sub.scanner_manufacturer == 'philips':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              PHILIPS_CONFIG,
+                                                              bidsOutput)
+        os.system(cmd)
+
+
+    elif sub.scanner_manufacturer == 'ge':
         cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
                                                               sub.pscid,
                                                               sub.session,
@@ -189,9 +207,7 @@ def convert(sub, bidsOutput):
                                                               sub.config,
                                                               bidsOutput)
         os.system(cmd)
-"""
 
-"""
     elif sub.institution == 'Hospital_Douglas':
         cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
                                                               sub.pscid,
@@ -207,7 +223,8 @@ def convert(sub, bidsOutput):
                                                               SIEMENS_CONFIG,
                                                               bidsOutput)
         os.system(cmd)
-"""
+
+
 def main():
     args = get_arguments()
     logging.basicConfig(level=args.log_level)
