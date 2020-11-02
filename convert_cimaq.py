@@ -9,8 +9,8 @@ import sys
 import tarfile
 
 SIEMENS = ['Prisma_fit', 'TrioTim', 'Prisma', 'Skyra']
-GE = ['DISCOVERY MR750','SIGNA Pioneer']
-PHILIPS = ['Intera','Achieva','Ingenia']
+GE = ['DISCOVERY MR750', 'SIGNA Pioneer']
+PHILIPS = ['Intera', 'Achieva', 'Ingenia', 'Achieva dStream']
 
 CONFIG_FOLDER = '/home/bore/p/unf/s/bids_conversion/configs'
 
@@ -18,6 +18,7 @@ MAIN_CONFIG = os.path.join(CONFIG_FOLDER, 'config.json')
 GE_CONFIG = os.path.join(CONFIG_FOLDER, 'config_ge_cimaq.json')
 SIEMENS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_siemens_cimaq.json')
 PHILIPS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq.json')
+QC_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq_QC.json')
 
 def get_arguments():
     parser = argparse.ArgumentParser(
@@ -93,9 +94,11 @@ class IRMSession:
             return 'philips'
         elif self.scanner_model in GE:
             return 'ge'
+        else:
+            print(self.scanner_model)
 
     def getConfig(self):
-        return 'config_{}_cimaq_{}.json'.format(self.scanner_manufacturer,
+        return 'config_{}_ccna_{}.json'.format(self.scanner_manufacturer,
                                                 self.institution)
 
     def show(self):
@@ -106,13 +109,20 @@ class IRMSession:
         print('# Institution: {}'.format(self.institution))
         print('#############')
 
+    def showOneLine(self):
+        print('{},{},{},{},{},{}'.format(self.pscid,
+                                           self.session,
+                                           self.institution,
+                                           self.scanner_manufacturer,
+                                           self.scanner_model,
+                                           self.filename))
 
 def readMeta(iFolder):
     metas = []
     allFiles = glob.glob(os.path.join(iFolder,'*meta'))
     allFiles.sort()
     for iFile in allFiles:
-        print('Read {}'.format(iFile))
+        #print('Read {}'.format(iFile))
         fp = open(iFile)
         for i, line in enumerate(fp):
             if '*' == line[0]:
@@ -128,11 +138,14 @@ def readMeta(iFolder):
                 elif 'Patient Sex' in line:
                     patient_sex = answer
                 elif 'Scanner Model Name' in line:
-                    scanner_model = answer
+                    scanner_model = answer.replace(' ','_')
                 elif 'Scanner Software Version' in line:
                     scanner_version = answer
                 elif 'Institution Name' in line:
-                    institution = answer.replace(' ','_')
+                    tmp_institution = answer.replace(' ','_')
+                    if not tmp_institution.isspace() or tmp_institution:
+                        institution = lower(tmp_institution)
+                        print(institution + 'HERE')
             elif '<FILES>' in line:
                 break
         fp.close()
@@ -157,6 +170,10 @@ def extract(sub):
         iTar.extractall()
     else:
         print('-> Already extracted {}'.format(tarname))
+
+def deleteArchive(sub):
+    cmd = 'rm -rf {}'.format(sub.filename)
+    os.system(cmd)
 
 
 def convert(sub, bidsOutput):
@@ -183,7 +200,7 @@ def convert(sub, bidsOutput):
                                                               bidsOutput)
         os.system(cmd)
 
-    elif sub.institution != 'Quebec' and sub.scanner_manufacturer == 'philips':
+    elif sub.institution != 'CINQ' and 'Quebec' not in sub.institution and sub.scanner_manufacturer == 'philips':
         cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
                                                               sub.pscid,
                                                               sub.session,
@@ -191,6 +208,14 @@ def convert(sub, bidsOutput):
                                                               bidsOutput)
         os.system(cmd)
 
+
+    elif sub.scanner_manufacturer == 'philips':
+        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
+                                                              sub.pscid,
+                                                              sub.session,
+                                                              QC_CONFIG,
+                                                              bidsOutput)
+        os.system(cmd)
 
     elif sub.scanner_manufacturer == 'ge':
         cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
@@ -208,19 +233,11 @@ def convert(sub, bidsOutput):
                                                               bidsOutput)
         os.system(cmd)
 
-    elif sub.institution == 'Hospital_Douglas':
+    elif sub.institution is 'Hospital_Douglas' or 'THE_OTTAWA_HOSPITAL_CIVIC':
         cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
                                                               sub.pscid,
                                                               sub.session,
                                                               sub.config,
-                                                              bidsOutput)
-        os.system(cmd)
-
-    elif sub.scanner_manufacturer == 'siemens' and sub.institution != '':
-        cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(sub.filename,
-                                                              sub.pscid,
-                                                              sub.session,
-                                                              SIEMENS_CONFIG,
                                                               bidsOutput)
         os.system(cmd)
 
@@ -229,11 +246,16 @@ def main():
     args = get_arguments()
     logging.basicConfig(level=args.log_level)
     subjects = readMeta(args.iFolder)
-
+    subjects.sort(key=lambda x: x.pscid, reverse=False)
     for sub in subjects:
+        #if sub.session=='V3':
+        #    sub.session = 'V03'
+        #sub.showOneLine()
         sub.show()
-        extract(sub)
-        convert(sub, args.oFolder)
+        #extract(sub)
+        #convert(sub, args.oFolder)
+        #deleteArchive(sub)
+
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 {
+    "lowerCase": "True",
     "descriptions": [
         {
             "dataType": "anat",
@@ -64,49 +65,49 @@
         {
             "dataType": "fmap",
             "modalityLabel": "magnitude2",
-	    "intendedFor": 5,
+            "intendedFor": 5,
             "criteria": {
                 "SeriesDescription": "gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		"EchoTime": 0.00738
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+                "EchoTime": 0.00738
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "phasediff",
-	    "intendedFor": 5,
+            "intendedFor": 5,
             "criteria": {
                 "SeriesDescription": "gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "phasediff",
-	    "intendedFor": 5,
+            "intendedFor": 5,
             "criteria": {
                 "SeriesDescription": "BOLD_RS_fieldmap_gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "magnitude1",
-	    "intendedFor": 5,
+            "intendedFor": 5,
             "criteria": {
                 "SeriesDescription": "BOLD_RS_fieldmap_gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		"EchoTime": 0.00492
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+                "EchoTime": 0.00492
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "magnitude2",
-	    "intendedFor": 5,
+            "intendedFor": 5,
             "criteria": {
                 "SeriesDescription": "BOLD_RS_fieldmap_gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		"EchoTime": 0.00738
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+                "EchoTime": 0.00738
             }
         },
         {
@@ -121,7 +122,7 @@
         {
             "dataType": "fmap",
             "modalityLabel": "epi",
-	    "intendedFor": 12,
+            "intendedFor": 12,
             "criteria": {
                 "SeriesDescription": "fmri*MemoryTask_*"
             }
@@ -129,30 +130,30 @@
         {
             "dataType": "fmap",
             "modalityLabel": "magnitude1",
-	    "intendedFor": 12,
+            "intendedFor": 12,
             "criteria": {
                 "SeriesDescription": "fmri_fieldmap_gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		"EchoTime": 0.00492
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+                "EchoTime": 0.00492
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "magnitude2",
-	    "intendedFor": 12,
+            "intendedFor": 12,
             "criteria": {
                 "SeriesDescription": "fmri_fieldmap_gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		"EchoTime": 0.00738
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+                "EchoTime": 0.00738
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "phasediff",
-	    "intendedFor": 12,
+            "intendedFor": 12,
             "criteria": {
                 "SeriesDescription": "fmri_fieldmap_gre_field_mapping",
-		"ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
             }
         },
         {

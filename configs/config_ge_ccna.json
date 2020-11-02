@@ -12,13 +12,16 @@
             "dataType": "anat",
             "modalityLabel": "T2star",
             "criteria": {
-                "SeriesDescription": "T2_STAR*"
+                "SeriesDescription": "*T2_STAR*"
             }
         },
         {
             "dataType": "func",
             "modalityLabel": "bold",
             "customLabels": "task-rest",
+            "sidecarChanges": {
+                "TaskName": "rest"
+            },
             "criteria": {
                 "SeriesDescription": "*Connectivity*"
             }
@@ -27,13 +30,16 @@
             "dataType": "func",
             "modalityLabel": "bold",
             "customLabels": "task-rest",
+            "sidecarChanges": {
+                "TaskName": "rest"
+            },
             "criteria": {
                 "SeriesDescription": "*CONNECTIVITY*"
             }
         },
         {
             "dataType": "anat",
-            "modalityLabel": "T2",
+            "modalityLabel": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
 		            "EchoNumber": 2

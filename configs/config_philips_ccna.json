@@ -1,5 +1,6 @@
 {
-    "lowerCase": "True",
+    "dcm2niixOptions": "-d 9 -b y -ba y -z y -f '%3s_%f_%p_%t'",
+    "caseSensitive": false,
     "descriptions": [
         {
             "dataType": "anat",
@@ -12,7 +13,7 @@
             "dataType": "anat",
             "modalityLabel": "T2star",
             "criteria": {
-                "SeriesDescription": "*T2_FFE*"
+                "SeriesDescription": "T2_FFE*"
             }
         },
         {
@@ -51,93 +52,80 @@
             "dataType": "func",
             "modalityLabel": "bold",
             "customLabels": "task-rest",
+            "sidecarChanges": {
+                "TaskName": "rest"
+            },
             "criteria": {
                 "SeriesDescription": "*fMRI"
-            },
-            "sidecarChanges": {
-                "TaskName": "rest",
-                "TotalReadoutTime": 1
-            }
-        },
-        {
-            "dataType": "func",
-            "modalityLabel": "bold",
-            "customLabels": "task-memory",
-            "criteria": {
-                "SeriesDescription": "*MemoryTask"
-            },
-            "sidecarChanges": {
-                "TaskName": "memory",
-                "TotalReadoutTime": 1
-            }
-        },
-        {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
-            "intendedFor": 7,
-            "criteria": {
-                "SeriesDescription": "fMRI*MemoryTask_*PA*"
-            },
-            "sidecarChanges": {
-                "PhaseEncodingDirection": "j",
-                "TotalReadoutTime": 1
             }
         },
         {
             "dataType": "dwi",
             "modalityLabel": "dwi",
             "criteria": {
-                "SeriesDescription": "DTI_32*"
+                "SeriesDescription": "DTI_32_iso"
             },
             "sidecarChanges": {
-                "PhaseEncodingDirection": "j-",
-                "TotalReadoutTime": 1
+              "PhaseEncodingDirection": "j-"
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "epi",
-            "intendedFor": 9,
             "criteria": {
-                "SeriesDescription": "*b0*_AP*"
+                "SeriesDescription": "DTI_b0_AP"
+            },
+            "intendedFor": 7,
+            "sidecarChanges": {
+              "PhaseEncodingDirection": "j",
+              "TotalReadoutTime": 0.062
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "DTI_32"
             },
             "sidecarChanges": {
-                "PhaseEncodingDirection": "j-",
-                "TotalReadoutTime": 1
+              "PhaseEncodingDirection": "j-"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "DTI"
+            },
+            "sidecarChanges": {
+              "PhaseEncodingDirection": "j"
             }
         },
         {
             "dataType": "fmap",
             "modalityLabel": "epi",
-            "intendedFor": 7,
             "criteria": {
-                "SeriesDescription": "fMRI*MemoryTask_*AP*"
+                "SeriesDescription": "DTI_b0",
+                "InstitutionName": "UBC"
             },
             "sidecarChanges": {
-                "PhaseEncodingDirection": "j-",
-                "TotalReadoutTime": 1
-            }
+              "PhaseEncodingDirection": "j-",
+              "TotalReadoutTime": 0.062
+            },
+            "intendedFor": 9
         },
         {
             "dataType": "fmap",
-            "modalityLabel": "fieldmap",
-            "intendedFor": 7,
+            "modalityLabel": "epi",
             "criteria": {
-                "SeriesDescription": "B0_map",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
+                "SeriesDescription": "DTI_b0",
+                "InstitutionName": "UBC_MRI_Research_Centre"
             },
             "sidecarChanges": {
-                "Units": "Hz"
-            }
-        },
-        {
-            "dataType": "fmap",
-            "modalityLabel": "magnitude",
-            "intendedFor": 7,
-            "criteria": {
-                "SeriesDescription": "B0_map",
-                "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
-            }
+              "PhaseEncodingDirection": "j",
+              "TotalReadoutTime": 0.062
+            },
+            "intendedFor": 10
         }
     ]
 }

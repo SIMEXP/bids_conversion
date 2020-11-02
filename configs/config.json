@@ -1,5 +1,6 @@
 {
-    "dupMethod": "dup",
+    "dcm2niixOptions": "-d 9 -b y -ba y -z y -f '%3s_%f_%p_%t'",
+    "lowerCase": "True",
     "descriptions": [
         {
             "dataType": "anat",
