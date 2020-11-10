@@ -115,7 +115,7 @@ class IRMSession:
     def get_config(self):
         if self.mode == 'ccna':
             return 'config_{}_{}.json'.format(self.scanner_manufacturer,
-                                                 self.mode)
+                                              self.mode)
         elif self.mode == 'cimaq':
             return 'config_{}_{}_{}.json'.format(self.scanner_manufacturer,
                                                  self.mode,
@@ -158,11 +158,11 @@ class IRMSession:
     def extract(self):
         tarname= self.filename + '.tar.gz'
         if not os.path.exists(self.filename):
-            #print('-> Extraction {}'.format(tarname))
+            print('-> Extraction {}'.format(tarname))
             iTar = tarfile.open(name=tarname, mode='r|gz')
             iTar.extractall(self.filename)
-        #else:
-        #    print('-> Already extracted {}'.format(tarname))
+        else:
+            print('-> Already extracted {}'.format(tarname))
 
 
     def delete_filename(self):
@@ -363,11 +363,10 @@ def main():
 
     for sub in subjects:
         #sub.showOneLine()
-        if sub.scanner_manufacturer == 'philips':
-            #print(sub.candid, sub.pscid)
-            sub.extract()
-            sub.convert('/home/bore/p/o_ccna')
-            #sub.delete_filename()
+        #print(sub.candid, sub.pscid)
+        sub.extract()
+        sub.convert(args.oFolder)
+        sub.delete_filename()
 
 
 if __name__ == '__main__':
