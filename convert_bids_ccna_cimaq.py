@@ -3,10 +3,10 @@
 
 import argparse
 import glob
-import logging
 import os
 import sys
 import tarfile
+import time
 
 SIEMENS = ['Prisma_fit', 'TrioTim', 'Prisma', 'Skyra']
 GE = ['DISCOVERY_MR750', 'SIGNA_Pioneer', 'DISCOVERY_MR750w', 'Signa_HDxt']
@@ -15,48 +15,46 @@ PHILIPS = ['Intera', 'Achieva', 'Ingenia', 'Achieva_dStream']
 CONFIG_FOLDER = '/home/bore/p/unf/s/bids_conversion/configs'
 
 MAIN_CONFIG = os.path.join(CONFIG_FOLDER, 'config.json')
-#GE_CONFIG = os.path.join(CONFIG_FOLDER, 'config_ge_cimaq.json')
-#SIEMENS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_siemens_cimaq.json')
-#PHILIPS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq.json')
-# QUEBEC_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq_QC.json')
+GE_CONFIG = os.path.join(CONFIG_FOLDER, 'config_ge_cimaq.json')
+SIEMENS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_siemens_cimaq.json')
+PHILIPS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq.json')
+QUEBEC_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq_QC.json')
+CIMAQ_SIEMENS_CONFIG = ['IUGM', 'hospital_douglas',
+                        'Mc_Connell_Brain_Imaging_Centre',
+                        'THE_OTTAWA_HOSPITAL_CIVIC',
+                        'the_ottawa_hospital_civic_campus']
+TIME_SLEEP = 1
+
 
 def get_arguments():
-    parser = argparse.ArgumentParser(
+    p = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        description="",
-        epilog="""
-        Convert CIMAQ release to bids format
-        Input: Folder with zip files
+        description="""
+        Convert CIMAQ or CCNA release to bids format.
+        Input: Folder with tar files.
         """)
 
-    parser.add_argument(
-        "iFolder",
-        help="Folder to be sorted")
+    p.add_argument('iFolder',
+                   help="Folder to be sorted")
 
-    parser.add_argument(
-        "oFolder",
-        help="Output folder - if doesn\'t exist it will be created.")
+    p.add_argument('oFolder',
+                   help='Output folder - if doesn\'t exist it will be '
+                        'created.')
 
-    parser.add_argument("mode", default='ccna',
-                        help="Mode CCNA or CIMAQ")
+    p.add_argument('mode', default='ccna',
+                   help="Mode CCNA or CIMAQ")
 
-    parser.add_argument(
-        '--log_level', default='INFO',
-        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'],
-        help='Log level of the logging class.')
+    p.add_argument('--run_command', action='store_true',
+                   help='Run the command line otherwise it will print'
+                        ' the command line')
 
-    args = parser.parse_args()
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit()
-    else:
-        return parser
+    return p
 
 
 class IRMSession:
     def __init__(self, filename, patient_name, patient_id, patient_date,
                  scan_date, patient_sex, scanner_model, scanner_version,
-                 institution, mode):
+                 institution, mode, run_command):
         #  lineer
         #  (0, '<STUDY>\n')
         #  (L1, '<STUDY_INFO>\n')
@@ -84,23 +82,22 @@ class IRMSession:
         self.scanner_version = scanner_version
         self.institution = institution
 
-        self.pscid = patient_name.split('_')[0]  # participant ID 7 chiffres
-        self.candid = patient_name.split('_')[1]  # participant ID loris 6 chiffres
-        self.session = self.get_session(patient_name.split('_')[2])  # visit label
+        # participant ID 7 chiffres
+        self.pscid = patient_name.split('_')[0]
+        # participant ID loris 6 chiffres
+        self.candid = patient_name.split('_')[1]
+        # visit label
+        self.session = self.get_session(patient_name.split('_')[2])
 
         self.scanner_manufacturer = self.getManufacturer()
-        self.config = os.path.join(CONFIG_FOLDER ,self.get_config())
+        self.config = os.path.join(CONFIG_FOLDER, self.get_config())
+        self.run_command = run_command
 
     def get_session(self, session):
-        if self.mode == 'ccna':
-            if session == 'Initial':
-                return 1
-            else:
-                logging.error('{} - {} session wont be converted.'.format(self.filename,
-                                                                          session))
-                return 2
-        elif self.mode == 'cimaq':
-            return session
+        if session == 'Initial':
+            return 1
+        else:
+            return 2
 
     def getManufacturer(self):
         if self.scanner_model in SIEMENS:
@@ -131,20 +128,21 @@ class IRMSession:
 
     def showOneLine(self, all=False):
         if all:
-            print('{},{},{},{},{},{},{},{},{},{},{},{},{},{}'.format(self.filename,
-                                             self.patient_name,
-                                             self.patient_id,
-                                             self.patient_birthdate,
-                                             self.patient_sex,
-                                             self.scan_date,
-                                             self.candid,
-                                             self.pscid,
-                                             self.session,
-                                             self.institution,
-                                             self.scanner_manufacturer,
-                                             self.scanner_model,
-                                             self.mode,
-                                             self.config))
+            print('{},{},{},{},{},{},{},{},{},'
+                  '{},{},{},{},{}'.format(self.filename,
+                                          self.patient_name,
+                                          self.patient_id,
+                                          self.patient_birthdate,
+                                          self.patient_sex,
+                                          self.scan_date,
+                                          self.candid,
+                                          self.pscid,
+                                          self.session,
+                                          self.institution,
+                                          self.scanner_manufacturer,
+                                          self.scanner_model,
+                                          self.mode,
+                                          self.config))
 
         else:
             print('{},{},{},{},{},{}'.format(self.pscid,
@@ -154,21 +152,19 @@ class IRMSession:
                                              self.scanner_model,
                                              self.filename))
 
-
     def extract(self):
-        tarname= self.filename + '.tar.gz'
+        tarname = self.filename + '.tar.gz'
         if not os.path.exists(self.filename):
-            print('-> Extraction {}'.format(tarname))
+            print('# -> Extraction {}'.format(tarname))
             iTar = tarfile.open(name=tarname, mode='r|gz')
             iTar.extractall(self.filename)
         else:
-            print('-> Already extracted {}'.format(tarname))
-
+            print('# -> Already extracted {}'.format(tarname))
 
     def delete_filename(self):
-            cmd = 'rm -rf {}'.format(self.filename)
-            os.system(cmd)
-
+        cmd = 'rm -rf {}'.format(self.filename)
+        os.system(cmd)
+        time.sleep(TIME_SLEEP)
 
     def convert(self, bidsOutput):
         cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
@@ -176,99 +172,71 @@ class IRMSession:
                                                               self.session,
                                                               MAIN_CONFIG,
                                                               bidsOutput)
-        print(cmd)
-        #os.system(cmd)
+        if self.run_command:
+            os.system(cmd)
+            time.sleep(TIME_SLEEP)
+        else:
+            print(cmd)
 
         if self.mode == 'ccna':
-            cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
-                                                                  self.pscid,
-                                                                  self.session,
-                                                                  self.config,
-                                                                  bidsOutput)
-            print(cmd)
-            #os.system(cmd)
-        elif self.mode == 'cimaq':
-            if self.institution == 'IUGM' or\
-                'hospital_douglas':
-                cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
-                                                                      self.candid,
-                                                                      self.session,
-                                                                      self.config,
-                                                                      bidsOutput)
-                os.system(cmd)
+            cmd = 'dcm2bids -d {} -p {} -s {} '\
+                  '-c {} -o {}'.format(self.filename,
+                                       self.pscid,
+                                       self.session,
+                                       self.config,
+                                       bidsOutput)
 
+        elif self.mode == 'cimaq':
+            if self.institution in CIMAQ_SIEMENS_CONFIG:
+                curr_config = self.config
             elif self.institution != 'CINQ' and\
                 'Quebec' not in self.institution and\
-                self.scanner_manufacturer == 'philips':
-                cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
-                                                                      self.candid,
-                                                                      self.session,
-                                                                      PHILIPS_CONFIG,
-                                                                      bidsOutput)
-                os.system(cmd)
-
-
+                    self.scanner_manufacturer == 'philips':
+                curr_config = PHILIPS_CONFIG
             elif self.scanner_manufacturer == 'philips':
-                cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
-                                                                      self.candid,
-                                                                      self.session,
-                                                                      QUEBEC_CONFIG,
-                                                                      bidsOutput)
-                os.system(cmd)
-
+                curr_config = QUEBEC_CONFIG
             elif self.scanner_manufacturer == 'ge':
-                cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
-                                                                      self.candid,
-                                                                      self.session,
-                                                                      GE_CONFIG,
-                                                                      bidsOutput)
-                os.system(cmd)
-
-            elif self.institution == 'Mc_Connell_Brain_Imaging_Centre':
-                cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
-                                                                      self.candid,
-                                                                      self.session,
-                                                                      self.config,
-                                                                      bidsOutput)
-                os.system(cmd)
-
-            elif self.institution is 'hospital_douglas' or\
-                                     'THE_OTTAWA_HOSPITAL_CIVIC' or\
-                                     'the_ottawa_hospital_civic_campus' or\
-                                     'Mc_Connell_Brain_Imaging_Centre':
-                cmd = 'dcm2bids -d {} -p {} -s {} -c {} -o {}'.format(self.filename,
-                                                                      self.candid,
-                                                                      self.session,
-                                                                      self.config,
-                                                                      bidsOutput)
-                os.system(cmd)
-
+                curr_config = GE_CONFIG
             else:
-                print('--> {} not converted, {} - institution'.format(self.filename,
-                                                                      self.institution))
+                print('# --> {} not converted, {} '
+                      '- institution'.format(self.filename,
+                                             self.institution))
+                pass
+
+            cmd = 'dcm2bids -d {} -p {} -s {} '\
+                  '-c {} -o {}'.format(self.filename,
+                                       self.candid,
+                                       self.session,
+                                       curr_config,
+                                       bidsOutput)
+
+        if self.run_command:
+            os.system(cmd)
+            time.sleep(TIME_SLEEP)
+        else:
+            print(cmd)
 
 
-def read_metas(iFolder, mode):
+def read_metas(oFolder, mode, run_command):
     metas = []
-    allFiles = glob.glob(os.path.join(iFolder,'**/*.meta'), recursive=True)
+    allFiles = glob.glob(os.path.join(oFolder, '**/*.meta'), recursive=True)
     allFiles.sort()
     for iFile in allFiles:
-
-        patient_name=None
-        patient_id=None
-        patient_date=None
-        scan_date=None
-        patient_sex=None
-        scanner_model=None
-        scanner_version=None
-        institution=None
+        patient_name = None
+        patient_id = None
+        patient_date = None
+        scan_date = None
+        patient_sex = None
+        scanner_model = None
+        scanner_version = None
+        institution = None
 
         fp = open(iFile)
         for i, line in enumerate(fp):
             if '*' == line[0]:
                 answer = line.split(':')[1].strip()
-                answer = answer.replace(' ','_')
-                if answer.isspace() or answer=='':
+                answer = answer.replace(' ', '_')
+                if answer.isspace() or answer == '':
                     continue
 
                 if 'Patient Name' in line:
@@ -300,21 +268,22 @@ def read_metas(iFolder, mode):
                                 scanner_model,
                                 scanner_version,
                                 institution,
-                                mode))
+                                mode,
+                                run_command))
 
     return metas
 
 
 def extract_main_tar(i_tar_filename, oFolder):
-    i_basename, i_extension = os.path.splitext(i_tar_filename)
+    i_basename, i_extension = os.path.splitext(os.path.basename(i_tar_filename))
     o_folder_name = os.path.join(oFolder, i_basename)
 
     if not os.path.exists(o_folder_name):
-        print('-> Extraction {}'.format(i_tar_filename))
+        print('# -> Extraction {}'.format(i_tar_filename))
         iTar = tarfile.open(name=i_tar_filename, mode='r')
         iTar.extractall(o_folder_name)
     else:
-        print('{} already exists' .format(o_folder_name))
+        print('# {} already exists' .format(o_folder_name))
 
 
 def extract_unique_dataset(metas):
@@ -326,10 +295,10 @@ def extract_unique_dataset(metas):
     """
     list_of_metas = []
     for nMeta in metas:
-            list_of_metas.append((nMeta.institution,
-                                  nMeta.scanner_model,
-                                  nMeta.scanner_manufacturer,
-                                  nMeta.scanner_version))
+        list_of_metas.append((nMeta.institution,
+                              nMeta.scanner_model,
+                              nMeta.scanner_manufacturer,
+                              nMeta.scanner_version))
     indexes = []
     uniqueMetas = list(set(list_of_metas))
     for uniqueMeta in uniqueMetas:
@@ -343,27 +312,26 @@ def extract_unique_dataset(metas):
 
 
 def check_mode(parser, mode):
-    if not mode in ['ccna','cimaq']:
+    if mode not in ['ccna', 'cimaq']:
         parser.error('{} mode is not valid (ccna or cimaq).'.format(mode))
 
 
 def main():
     parser = get_arguments()
     args = parser.parse_args()
-    logging.basicConfig(level=args.log_level)
 
     check_mode(parser, args.mode)
 
-    all_tar_files = glob.glob(os.path.join(args.iFolder,'*tar'))
+    all_tar_files = glob.glob(os.path.join(args.iFolder, '*tar'))
     all_tar_files.sort()
-    for curr_tar_file in all_tar_files:
+    for curr_tar_file in all_tar_files[0:5]:
         extract_main_tar(curr_tar_file, args.oFolder)
 
-    subjects = read_metas(args.iFolder, args.mode)
+    subjects = read_metas(args.oFolder, args.mode, args.run_command)
 
     for sub in subjects:
-        #sub.showOneLine()
-        #print(sub.candid, sub.pscid)
+        # sub.showOneLine()
+        # print(sub.candid, sub.pscid)
         sub.extract()
         sub.convert(args.oFolder)
         sub.delete_filename()

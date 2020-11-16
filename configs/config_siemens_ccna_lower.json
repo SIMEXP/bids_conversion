@@ -1,0 +1,14 @@
+{
+    "caseSensitive": false,
+    "descriptions": [
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2star",
+            "criteria": {
+                "SeriesDescription": "T2*STAR",
+                "ImageType": ["M"]
+
+            }
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "lowerCase": "True",
+    "descriptions": [
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2star",
+            "criteria": {
+                "SeriesDescription": "T2_STAR",
+		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-rest",
+            "criteria": {
+                "ProtocolName": "Connectivity_fMRI"
+            },
+	          "sidecarChanges": {
+                "TaskName": "rest"
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2w",
+            "criteria": {
+                "SeriesDescription": "PD_T2_FS",
+		            "EchoTime": 0.091
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "PD",
+            "criteria": {
+                "SeriesDescription": "PD_T2_FS",
+		            "EchoTime": 0.01
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+              "SeriesDescription": "DTI",
+            	"ImageType": ["ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM", "MOSAIC"]
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "epi",
+	          "intendedFor": 4,
+            "criteria": {
+                "SeriesDescription": "DWI-B03_PA"
+            }
+        }
+    ]
+}
