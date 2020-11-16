@@ -324,7 +324,7 @@ def main():
 
     all_tar_files = glob.glob(os.path.join(args.iFolder, '*tar'))
     all_tar_files.sort()
-    for curr_tar_file in all_tar_files[0:5]:
+    for curr_tar_file in all_tar_files:
         extract_main_tar(curr_tar_file, args.oFolder)
 
     subjects = read_metas(args.oFolder, args.mode, args.run_command)
