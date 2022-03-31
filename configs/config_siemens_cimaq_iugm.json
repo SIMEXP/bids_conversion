@@ -3,10 +3,33 @@
     "descriptions": [
         {
             "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "ProtocolName": "MPRAGE*"
+            }
+        },
+        {
+            "dataType": "anat",
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*STAR*",
 		            "ImageType": ["*", "*", "M", "*"]
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2*star",
+            "criteria": {
+                "SeriesDescription": "*T2*star*",
+		            "ImageType": ["*", "*", "M", "*"]
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2*star",
+            "criteria": {
+                "SeriesDescription": "*T2*star*",
+		            "ImageType": ["*", "*", "P", "*", "*"]
             }
         },
         {
@@ -112,15 +135,23 @@
             "dataType": "anat",
             "modalityLabel": "T2w",
             "criteria": {
-                "SeriesDescription": "*PD*T2*",
+                "SeriesDescription": "PD*T2*",
                 "EchoTime": 0.091
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2w",
+            "criteria": {
+                "SeriesDescription": "PD*T2*",
+                "EchoTime": 0.093
             }
         },
         {
             "dataType": "anat",
             "modalityLabel": "PD",
             "criteria": {
-                "SeriesDescription": "*PD*T2*",
+                "SeriesDescription": "PD*T2*",
                 "EchoTime": 0.01
             }
         },
