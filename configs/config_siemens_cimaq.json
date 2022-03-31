@@ -6,7 +6,7 @@
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "T2*star*",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             }
         },
         {
@@ -14,7 +14,7 @@
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*STAR*",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             }
         },
         {
@@ -22,7 +22,7 @@
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*STAR*",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "NORM", "DIS2D"]
             }
         },
         {
@@ -58,8 +58,8 @@
 	          "intendedFor": 5,
             "criteria": {
                 "SeriesDescription": "gre_field_mapping",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		            "EchoTime": 0.00492
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+		        "EchoTime": 0.00492
             }
         },
         {
@@ -157,11 +157,12 @@
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "dataType": "fmap",
+            "modalityLabel": "phasediff",
+            "intendedFor": 12,
             "criteria": {
-                "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.091
+                "SeriesDescription": "fmri_fieldmap_gre_field_mapping",
+                "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND", "PHASE"]
             }
         },
         {
@@ -169,7 +170,15 @@
             "modalityLabel": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.093
+		        "EchoTime": 0.091
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T2w",
+            "criteria": {
+                "SeriesDescription": "*PD*T2*",
+		        "EchoTime": 0.093
             }
         },
         {
@@ -177,7 +186,7 @@
             "modalityLabel": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.01
+		        "EchoTime": 0.01
             }
         },
         {
