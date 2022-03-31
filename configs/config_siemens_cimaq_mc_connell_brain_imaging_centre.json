@@ -3,6 +3,13 @@
     "descriptions": [
         {
             "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "ProtocolName": "MPRAGE*"
+            }
+        },
+        {
+            "dataType": "anat",
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*STAR*",
