@@ -3,6 +3,21 @@
     "descriptions": [
         {
             "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SeriesDescription": "T1*",
+                "ProtocolName": "T1*"
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "ProtocolName": "3D*MPR*"
+            }
+        },
+        {
+            "dataType": "anat",
             "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "T2_STAR"
@@ -45,6 +60,13 @@
             "criteria": {
                 "SeriesDescription": "*PD_T2*",
                 "EchoTime": 0.0125
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "FLAIR",
+            "criteria": {
+                "SeriesDescription": "*FLAIR*"
             }
         },
         {
@@ -124,7 +146,31 @@
             "intendedFor": 7,
             "criteria": {
                 "SeriesDescription": "B0_map",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
+		        "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
+            },
+            "sidecarChanges": {
+                "Units": "Hz"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fieldmap",
+            "intendedFor": 7,
+            "criteria": {
+                "SeriesDescription": "B0 map",
+		        "ImageType": ["ORIGINAL", "PRIMARY", "B0 MAP", "B0", "UNSPECIFIED", "FIELDMAPHZ"]
+            },
+            "sidecarChanges": {
+                "Units": "Hz"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fieldmap",
+            "intendedFor": 7,
+            "criteria": {
+                "SeriesDescription": "B0 map",
+		"ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
             },
             "sidecarChanges": {
                 "Units": "Hz"
