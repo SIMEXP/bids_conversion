@@ -1,2 +1,2 @@
 # bids_conversion
-Scripts to convert data from CCNA and CIMAQ using dcm2bids
+Script to help convert dicom to bids from CCNA or CIMAQ using dcm2bids
