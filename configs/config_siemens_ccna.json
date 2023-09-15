@@ -2,8 +2,8 @@
     "caseSensitive": false,
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "customLabels": "part-mag",
             "criteria": {
                 "SeriesDescription": "T2*star*",
@@ -11,8 +11,8 @@
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "customLabels": "part-phase",
             "criteria": {
                 "SeriesDescription": "T2*star*",
@@ -20,104 +20,110 @@
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
+            "datatype": "func",
+            "suffix": "bold",
             "customLabels": "task-rest",
-            "sidecarChanges": {
-                "TaskName": "rest"
-            },
             "criteria": {
                 "SeriesDescription": "*Connectivity*"
+            },
+            "sidecar_changes": {
+                "TaskName": "rest"
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
+            "datatype": "func",
+            "suffix": "bold",
             "customLabels": "task-rest",
-            "sidecarChanges": {
-                "TaskName": "rest"
-            },
             "criteria": {
                 "SeriesDescription": "*R*S*fMRI*"
+            },
+            "sidecar_changes": {
+                "TaskName": "rest"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.091
+		        "EchoTime": 0.091
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.093
+		        "EchoTime": 0.093
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.01
+		        "EchoTime": 0.01
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "DTI-EDM"
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "DTI"
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
+            "datatype": "fmap",
+            "suffix": "epi",
             "criteria": {
                 "SeriesDescription": "D*0*"
             },
-            "intendedFor": [7, 8]
-        },
-        {
-            "dataType": "fmap",
-            "modalityLabel": "magnitude1",
-	          "intendedFor": [2, 3],
-            "criteria": {
-                "SeriesDescription": "*gre_field_mapping*",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		            "EchoTime": 0.00492
+            "sidecar_changes": {
+                "intendedFor": [7, 8]
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "magnitude2",
-	          "intendedFor": [2, 3],
+            "datatype": "fmap",
+            "suffix": "magnitude1",
             "criteria": {
                 "SeriesDescription": "*gre_field_mapping*",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		            "EchoTime": 0.00738
-            }
-        },
-        {
-            "dataType": "fmap",
-            "modalityLabel": "phasediff",
-	          "intendedFor": [2, 3],
-            "criteria": {
-                "SeriesDescription": "*gre_field_mapping*",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"],
-		            "EchoTime": 0.00738
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+		        "EchoTime": 0.00492
             },
-            "sidecarChanges": {
-		            "EchoTime1": 0.00492,
+            "sidecar_changes": {
+                "intendedFor": [2, 3]
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "magnitude2",
+            "criteria": {
+                "SeriesDescription": "*gre_field_mapping*",
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+		        "EchoTime": 0.00738
+            },
+            "sidecar_changes": {
+                "intendedFor": [2, 3]
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "phasediff",
+            "criteria": {
+                "SeriesDescription": "*gre_field_mapping*",
+		        "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"],
+		        "EchoTime": 0.00738
+            },
+            "sidecar_changes": {
+	            "intendedFor": [2, 3],
+		        "EchoTime1": 0.00492,
                 "EchoTime2": 0.00738
             }
         }
