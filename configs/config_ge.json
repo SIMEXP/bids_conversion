@@ -2,54 +2,54 @@
     "lowerCase": "True",
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "OAx_T2star_GRE"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "T2_STAR*"
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
+            "datatype": "func",
+            "suffix": "bold",
             "customLabels": "task-rest",
             "criteria": {
                 "SeriesDescription": "*Connectivity*"
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
+            "datatype": "func",
+            "suffix": "bold",
             "customLabels": "task-rest",
             "criteria": {
                 "SeriesDescription": "*CONNECTIVITY*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2",
+            "datatype": "anat",
+            "suffix": "T2",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
 		            "EchoNumber": 2
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
 		            "EchoNumber": 1
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "*DTI*"
             }
