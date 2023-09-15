@@ -1,70 +1,70 @@
 {
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "OAx_T2star_GRE"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "T2_STAR-RPT"
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
+            "datatype": "func",
+            "suffix": "bold",
             "customLabels": "task-rest",
             "criteria": {
                 "SeriesDescription": "*Connectivity*"
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
+            "datatype": "func",
+            "suffix": "bold",
             "customLabels": "task-rest",
             "criteria": {
                 "SeriesDescription": "*CONNECTIVITY*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2",
+            "datatype": "anat",
+            "suffix": "T2",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.089792
+		        "EchoTime": 0.089792
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2",
+            "datatype": "anat",
+            "suffix": "T2",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.086328
+		        "EchoTime": 0.086328
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.011224
+		        "EchoTime": 0.011224
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.009592
+		        "EchoTime": 0.009592
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "*DTI*"
             }

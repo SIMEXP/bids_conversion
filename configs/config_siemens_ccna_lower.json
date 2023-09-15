@@ -2,12 +2,11 @@
     "caseSensitive": false,
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "T2*STAR",
                 "ImageType": ["M"]
-
             }
         }
     ]
