@@ -18,7 +18,7 @@
         },
         {
             "dataType": "anat",
-            "modalityLabel": "T2*star",
+            "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*star*",
 		            "ImageType": ["*", "*", "M", "*"]
@@ -26,7 +26,7 @@
         },
         {
             "dataType": "anat",
-            "modalityLabel": "T2*star",
+            "modalityLabel": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*star*",
 		            "ImageType": ["*", "*", "P", "*", "*"]
