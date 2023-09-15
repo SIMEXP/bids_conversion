@@ -12,15 +12,16 @@ SIEMENS = ['Prisma_fit', 'TrioTim', 'Prisma', 'Skyra']
 GE = ['DISCOVERY_MR750', 'SIGNA_Pioneer', 'DISCOVERY_MR750w', 'Signa_HDxt']
 PHILIPS = ['Intera', 'Achieva', 'Ingenia', 'Achieva_dStream']
 
-CONFIG_FOLDER = '/home/bore/p/unf/s/bids_conversion/configs'
+CONFIG_FOLDER = '/home/pemorin/bids_conversion-master/configs'
 
 MAIN_CONFIG = os.path.join(CONFIG_FOLDER, 'config.json')
 GE_CONFIG = os.path.join(CONFIG_FOLDER, 'config_ge_cimaq.json')
 SIEMENS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_siemens_cimaq.json')
 PHILIPS_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq.json')
-QUEBEC_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq_QC.json')
-CIMAQ_SIEMENS_CONFIG = ['IUGM', 'hospital_douglas',
-                        'Mc_Connell_Brain_Imaging_Centre']
+QUEBEC_CONFIG = os.path.join(CONFIG_FOLDER, 'config_philips_cimaq_qc.json')
+CIMAQ_SIEMENS_CONFIG = ['IUGM', 'iugm', 'hospital_douglas',
+                        'Mc_Connell_Brain_Imaging_Centre',
+                        'mc_connell_brain_imaging_centre']
 TIME_SLEEP = 1
 
 
@@ -92,10 +93,13 @@ class IRMSession:
         self.run_command = run_command
 
     def get_session(self, session):
-        if session == 'Initial':
-            return 1
-        else:
-            return 2
+        if self.mode == 'ccna':
+            if session == 'Initial':
+                return 1
+            else:
+                return 2
+        elif self.mode == 'cimaq':
+            return session
 
     def getManufacturer(self):
         if self.scanner_model in SIEMENS:
@@ -203,7 +207,7 @@ class IRMSession:
 
             cmd = 'dcm2bids -d {} -p {} -s {} '\
                   '-c {} -o {}'.format(self.filename,
-                                       self.candid,
+                                       self.pscid,
                                        self.session,
                                        curr_config,
                                        bidsOutput)
@@ -332,7 +336,7 @@ def main():
         # print(sub.candid, sub.pscid)
         sub.extract()
         sub.convert(args.oFolder)
-        sub.delete_filename()
+        #sub.delete_filename()
 
 
 if __name__ == '__main__':
