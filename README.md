@@ -1,5 +1,6 @@
 # bids_conversion
 Script to help convert dicom to bids from CCNA or CIMAQ using dcm2bids
+Code originaly provided by Arnaud Boré
 
 Requirements
 * requirements.txt (pip install -r requirements.txt)
