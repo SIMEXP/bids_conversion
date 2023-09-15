@@ -145,20 +145,32 @@
             "suffix": "fieldmap",
             "criteria": {
                 "SeriesDescription": "B0_map",
-		        "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
+		            "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
             },
-            "sidecar_changes": {
-                "intendedFor": 7,
+            "sidecarChanges": {
                 "Units": "Hz"
             }
         },
         {
-            "datatype": "fmap",
-            "suffix": "fieldmap",
+            "dataType": "fmap",
+            "modalityLabel": "fieldmap",
+            "intendedFor": 7,
             "criteria": {
                 "SeriesDescription": "B0 map",
 		        "ImageType": ["ORIGINAL", "PRIMARY", "B0 MAP", "B0", "UNSPECIFIED", "FIELDMAPHZ"]
             },
+            "sidecarChanges": {
+                "Units": "Hz"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fieldmap",
+            "intendedFor": 7,
+            "criteria": {
+                "SeriesDescription": "B0 map",
+		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
+            },
             "sidecar_changes": {
                 "intendedFor": 7,
                 "Units": "Hz"
@@ -169,7 +181,19 @@
             "suffix": "fieldmap",
             "criteria": {
                 "SeriesDescription": "B0 map",
-		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
+		            "ImageType": ["ORIGINAL", "PRIMARY", "B0 MAP", "B0", "UNSPECIFIED", "FIELDMAPHZ"]
+            },
+            "sidecar_changes": {
+                "intendedFor": 7,
+                "Units": "Hz"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "fieldmap",
+            "criteria": {
+                "SeriesDescription": "B0 map",
+		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
             },
             "sidecar_changes": {
                 "intendedFor": 7,

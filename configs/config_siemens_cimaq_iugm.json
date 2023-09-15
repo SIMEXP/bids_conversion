@@ -21,7 +21,7 @@
             "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*star*",
-		        "ImageType": ["*", "*", "M", "*"]
+		            "ImageType": ["*", "*", "M", "*"]
             }
         },
         {
@@ -29,7 +29,15 @@
             "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2*star*",
-		        "ImageType": ["*", "*", "P", "*", "*"]
+		            "ImageType": ["*", "*", "P", "*", "*"]
+            }
+        },
+        {
+            "datatype": "func",
+            "suffix": "bold",
+            "criteria": {
+                "SeriesDescription": "*T2*star*",
+		            "ImageType": ["*", "*", "P", "*", "*"]
             }
         },
         {

@@ -107,7 +107,7 @@
                 "EchoTime": 0.00738
             },
             "sidecar_changes": {
-	            "intendedFor": 5,
+	              "intendedFor": 5,
                 "EchoTime1": 0.00492,
                 "EchoTime2": 0.00738
             }
@@ -119,7 +119,7 @@
                 "SeriesDescription": "fmri*MemoryTask_*"
             },
             "sidecar_changes": {
-	            "intendedFor": 5
+	              "intendedFor": 5
             }
         },
         {
@@ -152,7 +152,7 @@
                 "SeriesDescription": "D*B0*"
             },
             "sidecar_changes": {
-	            "intendedFor": 12
+	              "intendedFor": 12
             }
         }
     ]
