@@ -49,9 +49,10 @@
             }
         },
         {
+            "id": "task_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*fMRI"
             },
@@ -76,12 +77,13 @@
                 "SeriesDescription": "DTI_b0_AP"
             },
             "sidecar_changes": {
-              "PhaseEncodingDirection": "j",
-              "intendedFor": 7,
-              "TotalReadoutTime": 0.062
+                "PhaseEncodingDirection": "j",
+                "TotalReadoutTime": 0.062,
+                "IntendedFor": "dwi"
             }
         },
         {
+            "id": "dwi",
             "datatype": "dwi",
             "suffix": "dwi",
             "criteria": {
@@ -92,6 +94,7 @@
             }
         },
         {
+            "id": "dwi",
             "datatype": "dwi",
             "suffix": "dwi",
             "criteria": {
@@ -110,8 +113,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
-                "intendedFor": 9,
-                "TotalReadoutTime": 0.062
+                "TotalReadoutTime": 0.062,
+                "IntendedFor": "dwi"
             },
         },
         {
@@ -123,8 +126,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j",
-                "intendedFor": 10,
-                "TotalReadoutTime": 0.062
+                "TotalReadoutTime": 0.062,
+                "IntendedFor": "dwi"
             },
         }
     ]

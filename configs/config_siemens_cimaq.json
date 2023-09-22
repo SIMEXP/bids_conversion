@@ -26,9 +26,10 @@
             }
         },
         {
+            "id": "task_memory",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*Connectivity*",
                 "TaskName": "rest"
@@ -37,7 +38,7 @@
         {
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*R*fMRI*",
                 "TaskName": "rest"
@@ -46,7 +47,7 @@
         {
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*Resting*State*",
                 "TaskName": "rest"
@@ -57,11 +58,11 @@
             "suffix": "magnitude1",
             "criteria": {
                 "SeriesDescription": "gre_field_mapping",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
-		            "EchoTime": 0.00492
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"],
+		        "EchoTime": 0.00492
             },
             "sidecar_changes": {
-	              "intendedFor": 5
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -73,7 +74,7 @@
                 "EchoTime": 0.00738
             }
             "sidecar_changes": {
-	              "intendedFor": 5
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -84,7 +85,7 @@
                 "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
             },
             "sidecar_changes": {
-	              "intendedFor": 5
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -95,7 +96,7 @@
                 "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
             },
             "sidecar_changes": {
-	              "intendedFor": 5
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -107,7 +108,7 @@
                 "EchoTime": 0.00492
             },
             "sidecar_changes": {
-	              "intendedFor": 5
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -119,13 +120,14 @@
                 "EchoTime": 0.00738
             },
             "sidecar_changes": {
-	              "intendedFor": 5
+	            "IntendedFor": "task_memory"
             }
         },
         {
+            "id": "task_memory",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-memory",
+            "custom_entities": "task-memory",
             "criteria": {
                 "SeriesDescription": "*MemoryTask",
                 "TaskName": "memory"
@@ -138,7 +140,7 @@
                 "SeriesDescription": "fmri*MemoryTask_*"
             },
             "sidecar_changes": {
-	              "intendedFor": 12
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -150,7 +152,7 @@
                 "EchoTime": 0.00492
             },
             "sidecar_changes": {
-	              "intendedFor": 12
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -162,7 +164,7 @@
                 "EchoTime": 0.00738
             },
             "sidecar_changes": {
-	              "intendedFor": 12
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -173,7 +175,7 @@
                 "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND"]
             },
             "sidecar_changes": {
-	              "intendedFor": 12
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -184,27 +186,7 @@
                 "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND", "PHASE"]
             },
             "sidecar_changes": {
-	              "intendedFor": 12
-            }
-        },
-        {
-
-            "datatype": "anat",
-            "suffix": "T2w",
-            "criteria": {
-                "SeriesDescription": "fmri_fieldmap_gre_field_mapping",
-                "ImageType": ["ORIGINAL", "PRIMARY", "P", "ND", "PHASE"]
-            },
-            "sidecar_changes": {
-	              "intendedFor": 12
-            }
-        },
-        {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
-            "criteria": {
-                "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.091
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -212,7 +194,15 @@
             "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.093
+		        "EchoTime": 0.091
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2w",
+            "criteria": {
+                "SeriesDescription": "*PD*T2*",
+		        "EchoTime": 0.093
             }
         },
         {
@@ -220,10 +210,11 @@
             "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoTime": 0.01
+		        "EchoTime": 0.01
             }
         },
         {
+            "id": "dwi",
             "datatype": "dwi",
             "suffix": "dwi",
             "criteria": {
@@ -237,7 +228,7 @@
                 "SeriesDescription": "D*0*"
             },
             "sidecar_changes": {
-	              "intendedFor": 20
+	            "IntendedFor": "dwi"
             }
         }
     ]

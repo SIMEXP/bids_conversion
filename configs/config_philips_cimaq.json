@@ -70,9 +70,10 @@
             }
         },
         {
+            "id": "task_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*fMRI"
             },
@@ -82,9 +83,10 @@
             }
         },
         {
+            "id": "task_memory",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-memory",
+            "custom_entities": "task-memory",
             "criteria": {
                 "SeriesDescription": "*MemoryTask"
             },
@@ -101,8 +103,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j",
-                "intendedFor": 7,
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_memory"
             }
         },
         {
@@ -124,8 +126,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
-                "intendedFor": 9,
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_memory"
             }
         },
         {
@@ -136,8 +138,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
-                "intendedFor": 7,
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_memory"
             }
         },
         {
@@ -145,35 +147,23 @@
             "suffix": "fieldmap",
             "criteria": {
                 "SeriesDescription": "B0_map",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
+		        "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
             },
-            "sidecarChanges": {
-                "Units": "Hz"
+            "sidecar_changes": {
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "fieldmap",
-            "intendedFor": 7,
+            "datatype": "fmap",
+            "suffix": "fieldmap",
             "criteria": {
                 "SeriesDescription": "B0 map",
 		        "ImageType": ["ORIGINAL", "PRIMARY", "B0 MAP", "B0", "UNSPECIFIED", "FIELDMAPHZ"]
             },
-            "sidecarChanges": {
-                "Units": "Hz"
-            }
-        },
-        {
-            "dataType": "fmap",
-            "modalityLabel": "fieldmap",
-            "intendedFor": 7,
-            "criteria": {
-                "SeriesDescription": "B0 map",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
-            },
             "sidecar_changes": {
-                "intendedFor": 7,
-                "Units": "Hz"
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
             }
         },
         {
@@ -181,23 +171,11 @@
             "suffix": "fieldmap",
             "criteria": {
                 "SeriesDescription": "B0 map",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "B0 MAP", "B0", "UNSPECIFIED", "FIELDMAPHZ"]
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
             },
             "sidecar_changes": {
-                "intendedFor": 7,
-                "Units": "Hz"
-            }
-        },
-        {
-            "datatype": "fmap",
-            "suffix": "fieldmap",
-            "criteria": {
-                "SeriesDescription": "B0 map",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
-            },
-            "sidecar_changes": {
-                "intendedFor": 7,
-                "Units": "Hz"
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
             }
         },
         {
@@ -208,7 +186,7 @@
                 "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
             },
             "sidecar_changes": {
-                "intendedFor": 7
+                "IntendedFor": "task_rest"
             }
         }
     ]

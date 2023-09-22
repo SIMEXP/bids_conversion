@@ -10,9 +10,10 @@
             }
         },
         {
+            "id": "task_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "ProtocolName": "Resting*State*"
             },
@@ -29,7 +30,7 @@
 		        "EchoTime": 0.00492
             },
 	        "sidecar_changes": {
-	            "intendedFor": 1,
+	            "IntendedFor": "task_rest",
                 "TaskName": "rest"
 	        }
         },
@@ -42,7 +43,7 @@
 		        "EchoTime": 0.00738
             },
 	        "sidecar_changes": {
-	            "intendedFor": 1,
+	            "IntendedFor": "task_rest",
                 "TaskName": "rest"
 	        }
         },
@@ -55,15 +56,16 @@
 		        "EchoTime": 0.00738
             },
             "sidecar_changes": {
-	            "intendedFor": 1,
+	            "IntendedFor": "task_rest",
 		        "EchoTime1": 0.00492,
                 "EchoTime2": 0.00738
             }
         },
         {
+            "id": "task_memory",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-memory",
+            "custom_entities": "task-memory",
             "criteria": {
                 "SeriesDescription": "*MemoryTask"
             },
@@ -80,7 +82,7 @@
 		        "EchoTime": 0.00492
             },
 	        "sidecar_changes": {
-	            "intendedFor": 5,
+	            "IntendedFor": "task_memory"
 	        }
         },
         {
@@ -92,7 +94,7 @@
 		        "EchoTime": 0.00738
             },
 	        "sidecar_changes": {
-	            "intendedFor": 5,
+	            "IntendedFor": "task_memory"
 	        }
         },
         {
@@ -104,7 +106,7 @@
 		        "EchoTime": 0.00738
             },
             "sidecar_changes": {
-	            "intendedFor": 5,
+	            "IntendedFor": "task_memory",
 		        "EchoTime1": 0.00492,
                 "EchoTime2": 0.00738
             }
@@ -116,7 +118,7 @@
                 "SeriesDescription": "fmri*MemoryTask_*"
             },
             "sidecar_changes": {
-	            "intendedFor": 5
+	            "IntendedFor": "task_memory"
             }
         },
         {
@@ -136,6 +138,7 @@
             }
         },
         {
+            "id": "dwi",
             "datatype": "dwi",
             "suffix": "dwi",
             "criteria": {
@@ -149,7 +152,7 @@
                 "SeriesDescription": "D*B0*"
             },
             "sidecar_changes": {
-	            "intendedFor": 12
+	            "IntendedFor": "dwi"
             }
         }
     ]
