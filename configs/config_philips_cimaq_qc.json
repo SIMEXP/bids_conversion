@@ -33,9 +33,10 @@
             }
         },
         {
+            "id": "task_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*fMRI"
             },
@@ -45,9 +46,10 @@
             }
         },
         {
+            "id": "task_memory",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-memory",
+            "custom_entities": "task-memory",
             "criteria": {
                 "SeriesDescription": "*MemoryTask"
             },
@@ -64,8 +66,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j",
-                "intendedFor": 4,
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_rest"
             }
         },
         {
@@ -87,8 +89,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
-                "intendedFor": 6,
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_memory"
             }
         },
         {
@@ -99,8 +101,8 @@
             },
             "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
-                "intendedFor": 4,
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_rest"
             }
         },
         {
@@ -111,8 +113,8 @@
                 "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
             },
             "sidecar_changes": {
-                "intendedFor": 4,
-                "Units": "Hz"
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
             }
         },
         {
@@ -120,8 +122,11 @@
             "suffix": "magnitude",
             "criteria": {
                 "SeriesDescription": "B0_map",
-                "intendedFor": 4,
                 "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
+            },
+            "sidecar_changes": {
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
             }
         }
     ]
