@@ -16,17 +16,19 @@
             }
         },
         {
+            "id": "task_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*Connectivity*"
             }
         },
         {
+            "id": "task_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*CONNECTIVITY*"
             }
@@ -36,7 +38,7 @@
             "suffix": "T2",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoNumber": 2
+		        "EchoNumber": 2
             }
         },
         {
@@ -44,7 +46,7 @@
             "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD*T2*",
-		            "EchoNumber": 1
+		        "EchoNumber": 1
             }
         },
         {

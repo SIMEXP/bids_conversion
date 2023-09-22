@@ -4,7 +4,7 @@
         {
             "datatype": "anat",
             "suffix": "T2star",
-            "customLabels": "part-mag",
+            "custom_entities": "part-mag",
             "criteria": {
                 "SeriesDescription": "T2*star*",
                 "ImageType": ["M"]
@@ -13,16 +13,17 @@
         {
             "datatype": "anat",
             "suffix": "T2star",
-            "customLabels": "part-phase",
+            "custom_entities": "part-phase",
             "criteria": {
                 "SeriesDescription": "T2*star*",
                 "ImageType": ["P"]
             }
         },
         {
+            "id": "taks_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*Connectivity*"
             },
@@ -31,9 +32,10 @@
             }
         },
         {
+            "id": "taks_rest",
             "datatype": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*R*S*fMRI*"
             },
@@ -73,6 +75,7 @@
             }
         },
         {
+            "id": "dwi",
             "datatype": "dwi",
             "suffix": "dwi",
             "criteria": {
@@ -86,7 +89,7 @@
                 "SeriesDescription": "D*0*"
             },
             "sidecar_changes": {
-                "intendedFor": [7, 8]
+                "IntendedFor": "dwi"
             }
         },
         {
@@ -98,7 +101,7 @@
 		        "EchoTime": 0.00492
             },
             "sidecar_changes": {
-                "intendedFor": [2, 3]
+                "IntendedFor": "taks_rest"
             }
         },
         {
@@ -110,7 +113,7 @@
 		        "EchoTime": 0.00738
             },
             "sidecar_changes": {
-                "intendedFor": [2, 3]
+                "IntendedFor": "taks_rest"
             }
         },
         {
@@ -122,9 +125,9 @@
 		        "EchoTime": 0.00738
             },
             "sidecar_changes": {
-	            "intendedFor": [2, 3],
 		        "EchoTime1": 0.00492,
-                "EchoTime2": 0.00738
+                "EchoTime2": 0.00738,
+	            "IntendedFor": "taks_rest"
             }
         }
     ]
