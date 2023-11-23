@@ -3,129 +3,132 @@
     "caseSensitive": false,
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "T2_STAR"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "T2_FFE*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "DUAL_*",
                 "EchoTime": 0.1
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "DUAL_*",
                 "EchoTime": 0.0125
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD_T2*",
                 "EchoTime": 0.1
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD_T2*",
                 "EchoTime": 0.0125
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
-            "customLabels": "task-rest",
-            "sidecarChanges": {
-                "TaskName": "rest"
-            },
+            "id": "task_rest",
+            "datatype": "func",
+            "suffix": "bold",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*fMRI"
-            }
+            },
+            "sidecar_changes": {
+                "TaskName": "rest"
+            },
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "DTI_32_iso"
             },
-            "sidecarChanges": {
-              "PhaseEncodingDirection": "j-"
+            "sidecar_changes": {
+                "PhaseEncodingDirection": "j-"
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
+            "datatype": "fmap",
+            "suffix": "epi",
             "criteria": {
                 "SeriesDescription": "DTI_b0_AP"
             },
-            "intendedFor": 7,
-            "sidecarChanges": {
-              "PhaseEncodingDirection": "j",
-              "TotalReadoutTime": 0.062
+            "sidecar_changes": {
+                "PhaseEncodingDirection": "j",
+                "TotalReadoutTime": 0.062,
+                "IntendedFor": "dwi"
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "id": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "DTI_32"
             },
-            "sidecarChanges": {
-              "PhaseEncodingDirection": "j-"
+            "sidecar_changes": {
+                "PhaseEncodingDirection": "j-"
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "id": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "DTI"
             },
-            "sidecarChanges": {
-              "PhaseEncodingDirection": "j"
+            "sidecar_changes": {
+                "PhaseEncodingDirection": "j"
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
+            "datatype": "fmap",
+            "suffix": "epi",
             "criteria": {
                 "SeriesDescription": "DTI_b0",
                 "InstitutionName": "UBC"
             },
-            "sidecarChanges": {
-              "PhaseEncodingDirection": "j-",
-              "TotalReadoutTime": 0.062
+            "sidecar_changes": {
+                "PhaseEncodingDirection": "j-",
+                "TotalReadoutTime": 0.062,
+                "IntendedFor": "dwi"
             },
-            "intendedFor": 9
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
+            "datatype": "fmap",
+            "suffix": "epi",
             "criteria": {
                 "SeriesDescription": "DTI_b0",
                 "InstitutionName": "UBC_MRI_Research_Centre"
             },
-            "sidecarChanges": {
-              "PhaseEncodingDirection": "j",
-              "TotalReadoutTime": 0.062
+            "sidecar_changes": {
+                "PhaseEncodingDirection": "j",
+                "TotalReadoutTime": 0.062,
+                "IntendedFor": "dwi"
             },
-            "intendedFor": 10
         }
     ]
 }

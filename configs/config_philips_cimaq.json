@@ -2,141 +2,191 @@
     "lowerCase": "True",
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T1w",
+            "criteria": {
+                "SeriesDescription": "T1*",
+                "ProtocolName": "T1*"
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T1w",
+            "criteria": {
+                "ProtocolName": "3D*MPR*"
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "T2_STAR"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2star",
+            "datatype": "anat",
+            "suffix": "T2star",
             "criteria": {
                 "SeriesDescription": "*T2_FFE*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "DUAL_*",
                 "EchoTime": 0.1
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "DUAL_*",
                 "EchoTime": 0.0125
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SeriesDescription": "*PD_T2*",
                 "EchoTime": 0.1
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*PD_T2*",
                 "EchoTime": 0.0125
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
-            "customLabels": "task-rest",
+            "datatype": "anat",
+            "suffix": "FLAIR",
+            "criteria": {
+                "SeriesDescription": "*FLAIR*"
+            }
+        },
+        {
+            "id": "task_rest",
+            "datatype": "func",
+            "suffix": "bold",
+            "custom_entities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*fMRI"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "TaskName": "rest",
                 "TotalReadoutTime": 1
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
-            "customLabels": "task-memory",
+            "id": "task_memory",
+            "datatype": "func",
+            "suffix": "bold",
+            "custom_entities": "task-memory",
             "criteria": {
                 "SeriesDescription": "*MemoryTask"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "TaskName": "memory",
                 "TotalReadoutTime": 1
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
-            "intendedFor": 7,
+            "datatype": "fmap",
+            "suffix": "epi",
             "criteria": {
                 "SeriesDescription": "fMRI*MemoryTask_*PA*"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "PhaseEncodingDirection": "j",
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_memory"
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "DTI_32*"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
                 "TotalReadoutTime": 1
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
-            "intendedFor": 9,
+            "datatype": "fmap",
+            "suffix": "epi",
             "criteria": {
                 "SeriesDescription": "*b0*_AP*"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_memory"
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "epi",
-            "intendedFor": 7,
+            "datatype": "fmap",
+            "suffix": "epi",
             "criteria": {
                 "SeriesDescription": "fMRI*MemoryTask_*AP*"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "PhaseEncodingDirection": "j-",
-                "TotalReadoutTime": 1
+                "TotalReadoutTime": 1,
+                "IntendedFor": "task_memory"
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "fieldmap",
-            "intendedFor": 7,
+            "datatype": "fmap",
+            "suffix": "fieldmap",
             "criteria": {
                 "SeriesDescription": "B0_map",
-		            "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
+		        "ImageType": ["ORIGINAL", "PRIMARY", "B0", "MAP", "B0", "UNSPECIFIED"]
             },
-            "sidecarChanges": {
-                "Units": "Hz"
+            "sidecar_changes": {
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "magnitude",
-            "intendedFor": 7,
+            "datatype": "fmap",
+            "suffix": "fieldmap",
+            "criteria": {
+                "SeriesDescription": "B0 map",
+		        "ImageType": ["ORIGINAL", "PRIMARY", "B0 MAP", "B0", "UNSPECIFIED", "FIELDMAPHZ"]
+            },
+            "sidecar_changes": {
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "fieldmap",
+            "criteria": {
+                "SeriesDescription": "B0 map",
+		        "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
+            },
+            "sidecar_changes": {
+                "Units": "Hz",
+                "IntendedFor": "task_rest"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "magnitude",
             "criteria": {
                 "SeriesDescription": "B0_map",
                 "ImageType": ["ORIGINAL", "PRIMARY", "M", "FFE", "M", "FFE"]
+            },
+            "sidecar_changes": {
+                "IntendedFor": "task_rest"
             }
         }
     ]
