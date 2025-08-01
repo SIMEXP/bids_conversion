@@ -3,23 +3,23 @@
     "lowerCase": "True",
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T1w",
+            "datatype": "anat",
+            "suffix": "T1w",
             "criteria": {
                 "SeriesDescription": "*T1*",
 		            "ProtocolName": "*T1*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T1w",
+            "datatype": "anat",
+            "suffix": "T1w",
             "criteria": {
                 "ProtocolName": "MPRAGE*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "FLAIR",
+            "datatype": "anat",
+            "suffix": "FLAIR",
             "criteria": {
                 "SeriesDescription": "*FLAIR*"
             }
